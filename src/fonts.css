@@ -1,0 +1,89 @@
+@font-face {
+  font-family: "Panton UI";
+  src: url("./assets/fonts/panton-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Panton UI";
+  src: url("./assets/fonts/panton-regularitalic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Panton UI";
+  src: url("./assets/fonts/panton-semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Panton UI";
+  src: url("./assets/fonts/panton-semibolditalic.woff2") format("woff2");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Panton UI";
+  src: url("./assets/fonts/panton-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Panton UI";
+  src: url("./assets/fonts/panton-bolditalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Primary custom font supplied by Escape Masters. */
+@font-face {
+  font-family: "Panton Light Caps";
+  src: url("./assets/fonts/panton-lightcaps.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Panton Light Caps";
+  src: url("./assets/fonts/panton-lightitaliccaps.otf") format("opentype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Panton Black Caps";
+  src: url("./assets/fonts/panton-blackcaps.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Panton Black Caps";
+  src: url("./assets/fonts/panton-blackitaliccaps.otf") format("opentype");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Fallback for environments where the custom font fails to load. */
+@font-face {
+  font-family: "PantonFallback";
+  src: local("Arial Black");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}

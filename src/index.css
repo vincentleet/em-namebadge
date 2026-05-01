@@ -1,0 +1,548 @@
+@import "./fonts.css";
+
+:root {
+  font-family: "Panton UI", "Panton Light Caps", "PantonFallback", "Segoe UI", Roboto, Arial, sans-serif;
+  color: #eef2ff;
+  background: #090b10;
+  --emRed: #ef2b11;
+  --emRedDark: #cb220c;
+  --emInk: #12151d;
+  --emInkSoft: #1f2531;
+  --emBorder: #2d3445;
+  --emCard: #121722;
+  --emMuted: #9ba5b7;
+  --radiusLg: 18px;
+  --radiusMd: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(1200px 700px at 8% -10%, #222938 0%, transparent 45%),
+    radial-gradient(900px 700px at 100% -20%, #221716 0%, transparent 42%),
+    #090b10;
+  color: #f4f6fb;
+  line-height: 1.35;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.appShell {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 2.25rem;
+}
+
+.headerBar {
+  background: linear-gradient(180deg, #171d29 0%, #111621 100%);
+  border: 1px solid #2b3344;
+  border-radius: var(--radiusLg);
+  padding: 1.2rem 1.35rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.2rem;
+  align-items: center;
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.6rem;
+  margin-bottom: 0.3rem;
+  font-family: "Panton UI", "PantonFallback", "Segoe UI", Roboto, Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.headerBar p,
+.panelHint {
+  color: var(--emMuted);
+  font-size: 0.92rem;
+  font-weight: 400;
+}
+
+.headerCredit {
+  margin-top: 0.2rem;
+  font-size: 0.82rem;
+  color: #8c95a9;
+  letter-spacing: 0.01em;
+}
+
+.headerActions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.savePdfBtn {
+  background: var(--emRed) !important;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08) inset, 0 10px 22px rgba(239, 43, 17, 0.38);
+  letter-spacing: 0.01em;
+  animation: savePdfGlow 2.6s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.savePdfBtn:hover {
+  background: var(--emRedDark) !important;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08) inset, 0 12px 24px rgba(239, 43, 17, 0.42);
+  animation-play-state: paused;
+}
+
+.savePdfBtn:disabled {
+  animation: none;
+}
+
+.savePdfBtn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -38%;
+  width: 36%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.24) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-16deg);
+  animation: savePdfShine 2.8s linear infinite;
+  pointer-events: none;
+}
+
+.savePdfBtn:hover::before,
+.savePdfBtn:disabled::before {
+  animation-play-state: paused;
+}
+
+@keyframes savePdfGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+      0 10px 22px rgba(239, 43, 17, 0.32);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+      0 12px 26px rgba(239, 43, 17, 0.42),
+      0 0 18px rgba(239, 43, 17, 0.22);
+  }
+}
+
+@keyframes savePdfShine {
+  0% {
+    left: -38%;
+  }
+  100% {
+    left: 120%;
+  }
+}
+
+button,
+select,
+input {
+  font: inherit;
+}
+
+button {
+  border: none;
+  border-radius: var(--radiusMd);
+  padding: 0.64rem 0.95rem;
+  cursor: pointer;
+  background: var(--emRed);
+  color: #fff;
+  font-weight: 900;
+  font-family: "Panton Black Caps", "Panton UI", "PantonFallback", "Segoe UI", Roboto, Arial, sans-serif;
+  text-transform: uppercase;
+  transition: background-color 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease;
+}
+
+button.secondary {
+  background: var(--emInkSoft);
+}
+
+button.danger {
+  background: #c23a3a;
+  padding: 0.38rem 0.7rem;
+}
+
+button:hover {
+  background: var(--emRedDark);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
+button.secondary:hover {
+  background: #1f2530;
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(310px, 380px) 1fr;
+  gap: 1.2rem;
+  margin-top: 1.2rem;
+}
+
+.editorPanel,
+.previewPanel {
+  background: var(--emCard);
+  border: 1px solid var(--emBorder);
+  border-radius: var(--radiusLg);
+  padding: 1.1rem;
+  box-shadow:
+    0 16px 34px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.editorList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-top: 0.9rem;
+}
+
+.editorPanelHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.previewPanelHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.editorCard {
+  border: 1px solid #2f3748;
+  border-radius: 16px;
+  padding: 0.95rem;
+  display: grid;
+  gap: 0.8rem;
+  background: linear-gradient(180deg, #161d2a 0%, #111824 100%);
+  color: #eff3fb;
+  position: relative;
+  box-shadow:
+    0 14px 24px rgba(0, 0, 0, 0.3),
+    0 1px 0 rgba(255, 255, 255, 0.06) inset;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.editorCard::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 18px;
+  border: 2px solid rgba(239, 43, 17, 0.78);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.editorCard:hover,
+.editorCard:focus-within {
+  border-color: rgba(239, 43, 17, 0.75);
+  box-shadow:
+    0 18px 28px rgba(0, 0, 0, 0.34),
+    0 0 22px rgba(239, 43, 17, 0.35),
+    0 0 44px rgba(239, 43, 17, 0.18),
+    0 1px 0 rgba(255, 255, 255, 0.08) inset;
+  transform: translateY(-1px);
+}
+
+.editorCard:hover::after,
+.editorCard:focus-within::after {
+  opacity: 1;
+}
+
+.editorCardHead {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.editorCard label {
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.editorCard input,
+.editorCard select {
+  border: 1px solid #3b4458;
+  border-radius: 11px;
+  padding: 0.62rem 0.72rem;
+  min-height: 44px;
+  line-height: 1.2;
+  background: #0d121b;
+  color: #f2f5fc;
+  text-transform: uppercase;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset;
+}
+
+.editorCard select {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 2rem;
+}
+
+.editorCard input:focus,
+.editorCard select:focus {
+  outline: 2px solid rgba(239, 43, 17, 0.22);
+  border-color: var(--emRed);
+  box-shadow: 0 0 0 3px rgba(239, 43, 17, 0.12);
+}
+
+.ghostBtn {
+  width: 100%;
+  background: #eef3fb;
+  color: #1f2a3c;
+  border: 1px solid #c7d1e1;
+  font-weight: 600;
+  padding: 0.56rem 0.66rem;
+}
+
+.ghostBtn:hover {
+  background: #e4eaf4;
+}
+
+.removeBtn {
+  margin-top: 0.3rem;
+  width: 100%;
+  border-radius: 11px;
+  padding: 0.7rem 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.a4Sheet {
+  margin-top: 0;
+  width: min(210mm, 100%);
+  max-width: 100%;
+  min-height: 297mm;
+  padding: 11mm 12mm;
+  border: 1px dashed #bcc4d3;
+  background: #fff;
+  display: flex;
+  gap: 4mm;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 6px;
+}
+
+.a4Pages {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.pdfExportTarget {
+  margin-top: 0;
+  gap: 0;
+}
+
+.pdfExportTarget .a4Sheet {
+  border: none;
+  page-break-after: always;
+}
+
+.pdfExportTarget .a4Sheet:last-child {
+  page-break-after: auto;
+}
+
+.pdfRenderClone {
+  position: fixed;
+  top: 0;
+  left: -10000px;
+  width: 210mm;
+  margin: 0;
+  padding: 0;
+  z-index: -1;
+  background: #fff;
+}
+
+.pdfRenderClone .a4Pages {
+  margin-top: 0;
+  gap: 0;
+}
+
+.pdfRenderClone .a4Sheet {
+  width: 210mm;
+  max-width: none;
+  min-height: 297mm;
+  margin: 0;
+  border: none;
+  page-break-after: auto;
+}
+
+.badge {
+  width: 3in;
+  height: 1.2in;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #d6dbe6;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.previewPanel h2,
+.previewPanel .panelHint {
+  color: #f4f6fb;
+}
+
+h2,
+h3 {
+  font-family: "Panton UI", "PantonFallback", "Segoe UI", Roboto, Arial, sans-serif;
+  font-weight: 700;
+}
+
+.headerPurchaseBlock {
+  text-align: right;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.headerPurchaseLabel {
+  font-size: 0.88rem;
+  color: var(--emMuted);
+}
+
+.headerPurchaseLink {
+  color: #ff8f7e;
+  font-size: 0.88rem;
+  text-decoration: none;
+}
+
+.headerPurchaseLink:hover {
+  text-decoration: underline;
+}
+
+.editorPanel h2,
+.previewPanel h2 {
+  font-size: 1.45rem;
+  letter-spacing: 0.005em;
+}
+
+.badgeBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.firstName,
+.roleText {
+  margin: 0;
+  left: 1.04in;
+  right: 0.18in;
+  text-align: left;
+  text-transform: uppercase;
+  font-family: "Panton Black Caps", "PantonFallback", "Arial Black", "Segoe UI Black", sans-serif;
+  line-height: 1;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  z-index: 1;
+}
+
+.firstName {
+  position: absolute;
+  top: 0.38in;
+  letter-spacing: 0.01em;
+}
+
+.roleText {
+  position: absolute;
+  top: 0.7in;
+  left: 1.08in;
+  font-size: 12px;
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 1000px) {
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .headerBar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  .headerBar,
+  .editorPanel,
+  .previewPanel > h2,
+  .previewPanel > .panelHint {
+    display: none !important;
+  }
+
+  .appShell,
+  .workspace,
+  .previewPanel,
+  .a4Sheet,
+  .a4Pages {
+    margin: 0;
+    padding: 0;
+    border: none;
+    width: auto;
+    min-height: auto;
+  }
+
+  .workspace {
+    display: block;
+  }
+
+  .a4Sheet {
+    gap: 4mm;
+    page-break-after: always;
+  }
+
+  .a4Sheet:last-child {
+    page-break-after: auto;
+  }
+
+  .badge {
+    break-inside: avoid;
+    border: none;
+  }
+}
