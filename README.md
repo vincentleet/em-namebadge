@@ -1,58 +1,69 @@
-# Escape Masters Name Badge Customiser
+# Escape Masters Name Badge Generator
 
-Web app for Escape Masters branches to create printable staff name badges.
+Web app for Escape Masters branches to lay out staff name badges on A4 and download a print-ready PDF.
 
-## What It Does
+## Features
 
-- Add multiple badges in one session.
-- Enter first name and choose role (`Game Master` or `Operations Manager`).
-- Live preview each badge at real print size: 3in x 1.2in.
-- Print or save all badges as PDF on an A4 page.
+- **Editor (left):** Add or remove badges (at least one stays). For each badge: **first name** (uppercase, up to 22 characters), **role** via preset (**Game Master**, **Operations Manager**) or **custom role** (free text, up to 28 characters). Long names are scaled down automatically so they fit the badge artwork.
+- **Preview (right):** Live **A4 print preview**. Each badge is **3in × 1.2in**, up to **14 badges per page**. Extra badges continue on further A4 pages.
+- **Save PDF:** Renders each A4 sheet with [html2canvas](https://github.com/niklasvh/html2canvas) and builds a multi-page PDF with [jsPDF](https://github.com/parallax/jsPDF). Downloads as `escape-masters-name-badges.pdf`. There is no separate browser “Print” button; use **Save PDF** for a consistent result.
+- **Header:** Supplier link for blank magnetic badges (Temu) and on-page credit.
 
-## Local Development
+## Tech stack
 
-1. Install dependencies:
-   - `npm install`
-2. Start dev server:
-   - `npm run dev`
-3. Open the URL shown in terminal.
+- [React](https://react.dev/) 19 and [Vite](https://vitejs.dev/) 8
+- PDF pipeline: `html2canvas` + `jspdf` (see `savePdf` in `src/App.jsx`)
 
-## Printing / PDF Export
+## Local development
 
-1. Click `Print / Save PDF`.
-2. In your browser print dialog:
-   - Paper size: `A4`
-   - Scale: `100%` (or `Actual size`)
-   - Margins: `Default` or `None` depending on printer behavior
-3. Print directly or save to PDF.
+1. Install dependencies: `npm install`
+2. Start the dev server: `npm run dev`
+3. Open the URL shown in the terminal.
 
-## Background Image And Font Upgrades
+Other scripts: `npm run build`, `npm run preview`, `npm run lint`.
 
-- Current background is a placeholder asset at `public/badge-bg-placeholder.svg`.
-- To replace the background for all badges, swap that file or update `DEFAULT_BG` in `src/App.jsx`.
-- Current text uses a fallback family defined in `src/fonts.css`.
-- When you receive Panton files, replace the `@font-face` source in `src/fonts.css`.
+## Badge background image
 
-## GitHub Pages Deployment
+The face of each badge uses a raster background referenced in `src/App.jsx` as `DEFAULT_BG`:
+
+- Expected file: **`public/namebadge-bg.png`** (URL includes a cache-busting query; change the file or bump the query in code if you replace the art).
+
+The file `public/badge-bg-placeholder.svg` is **not** used by the app today. To point at a different asset, change `DEFAULT_BG` in `src/App.jsx`.
+
+## Fonts
+
+Panton font files live under `src/assets/fonts/` and are wired in `src/fonts.css` (UI faces plus **Panton Black Caps** for the name line on the badge, with a local **Arial Black** fallback).
+
+## PDF vs browser print
+
+- **Recommended:** **Save PDF** in the preview panel.
+- The stylesheet still includes basic `@media print` rules if you use the browser’s print dialog, but layout is optimized around the PDF export path.
+
+## GitHub Pages deployment
+
+Deployments use **GitHub Actions** (`.github/workflows/deploy-github-pages.yml`). On each push to `main`, the workflow runs `npm ci`, `npm run build`, and publishes the `dist` folder to Pages.
 
 ### First-time setup
 
-1. Create a GitHub repository (recommended name: `Escape-Masters-Name-Badge-Customiser`).
-2. Push this project to the `main` branch.
-3. In GitHub repository settings, enable Pages from `gh-pages` branch.
+1. Push this repo to GitHub on the `main` branch (or edit the workflow to match your default branch).
+2. **Settings → Pages → Build and deployment:** set **Source** to **GitHub Actions**.
+3. Run the workflow once (push a commit, or **Actions → Deploy to GitHub Pages → Run workflow**).
 
-### Deploy
+Live URL pattern:
 
-Run:
+`https://<your-username>.github.io/<repository-name>/`
 
-- `npm run deploy`
+The workflow sets `REPO_NAME` so Vite’s production `base` matches that path; you normally do not edit `vite.config.js` when renaming the repo.
 
-This builds the app and publishes `dist` to `gh-pages`.
+### Local production build
 
-## Note About Repository Name
+```bash
+REPO_NAME=<repository-name> npm run build
+npm run preview
+```
 
-`vite.config.js` currently uses:
+Without `REPO_NAME`, production builds still default to `/Escape-Masters-Name-Badge-Customiser/` for the asset base path.
 
-- `/Escape-Masters-Name-Badge-Customiser/` as production base path.
+### Alternative: `gh-pages` branch
 
-If your repository name is different, update the `base` value in `vite.config.js`.
+You can run `npm run deploy` to push `dist` to the `gh-pages` branch. In **Settings → Pages**, use **Deploy from a branch** with `gh-pages`, **or** GitHub Actions—not both at once.
