@@ -2,7 +2,7 @@ import { useMemo, useRef, useState } from "react";
 
 const ROLE_OPTIONS = ["Game Master", "Operations Manager"];
 const CUSTOM_ROLE_VALUE = "__custom_role__";
-const DEFAULT_BG = `${import.meta.env.BASE_URL}namebadge-bg.png?v=4`;
+const DEFAULT_BG = `${import.meta.env.BASE_URL}namebadge-bg.png?v=5`;
 const NAME_FONT_FAMILY =
   '"Panton Black Caps", "PantonFallback", "Arial Black", "Segoe UI Black", sans-serif';
 const NAME_MAX_WIDTH_PX = 164;
